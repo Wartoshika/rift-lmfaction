@@ -1,6 +1,6 @@
-local addon, context, frame, textFrame, load
+local addon, context, frame, textFrame, load, parent
 local frameBar = {}
-local margin = 80
+local margin = 77.5
 
 -- initialisiert die gui
 function LmFaction.Ui.init(_addon)
@@ -14,7 +14,7 @@ function LmFaction.Ui.init(_addon)
     load = UI.CreateFrame("Mask", "LmFactionLoad", frame)
 
     -- parent auf die bar main festlegen
-    local parent = UI.Native.BarMain
+    parent = UI.Native.BarMain
 
     -- offsets setzen
     frame:SetPoint("TOPLEFT", parent, "TOPLEFT", margin, 0)
@@ -52,6 +52,9 @@ function LmFaction.Ui.init(_addon)
 
     -- border zeichnen
     LmFaction.Ui.buildFrameBars(frame, color)
+
+    -- wenn max lvl dann parent ui etwas veraendern
+    LmFaction.Ui.maxLevelCorrections()
 
 end
 
@@ -108,4 +111,55 @@ function LmFaction.Ui.buildFrameBars(mainFrame, color)
         frame.border:SetBackgroundColor(color.r, color.g, color.b, color.a)
     end
 
+end
+
+-- korregiert die offsets etwas um einer gui ohne erfahrungsleiste gerecht zu werden
+function LmFaction.Ui.maxLevelCorrections()
+
+    -- player setzen
+    local player = Inspect.Unit.Lookup("player")
+
+    -- mit vorhandenen player berechnen
+    local function maxLevelCalc(player)
+
+        -- details
+        local playerDetails = Inspect.Unit.Detail(player)
+
+        -- wenn der spieler nicht verfügbar ist dann warten
+        if playerDetails == nil then
+
+            -- abbrechen
+            return
+        end
+
+        -- event entfernen
+        Command.Event.Detach(Event.Unit.Add, scanUnits, "LmFaction.Event.Unit.Add")
+
+        -- aktuell ist 65 das max level
+        if playerDetails.level == 65 then
+
+            -- ok, anpassen
+            frame:SetHeight(10)
+            load:SetHeight(frame:GetHeight())
+        end
+
+    end
+
+    -- scant die units bis der "player" vorhanden ist
+    local function scanUnits(_, units)
+
+        -- alle units durchgehen und gucken wer "player" ist
+        for k,v in pairs(units) do
+
+            -- ist dies der spieler?
+            if k == player then
+
+                -- ja!
+                return maxLevelCalc(player)
+            end
+        end
+    end
+
+    -- es muss erstmal gewartet werden bis der spieler geladen ist
+    Command.Event.Attach(Event.Unit.Add, scanUnits, "LmFaction.Event.Unit.Add")
 end
