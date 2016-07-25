@@ -12,6 +12,7 @@ SavedVariables = {
 
 RunOnStartup = {
   "global.lua",
+  "util.lua",
   "notoriety.lua",
   "ui.lua",
   "main.lua"

@@ -1,6 +1,7 @@
 LmFaction = {
     Notoriety = {},
     Ui = {},
+    Util = {},
     _StartTime = nil,
     Options = {
         currentFaction = nil,
