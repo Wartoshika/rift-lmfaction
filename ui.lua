@@ -140,6 +140,7 @@ function LmFaction.Ui.maxLevelCorrections()
 
             -- ok, anpassen
             frame:SetHeight(10)
+            textFrame:SetFontSize(10)
             load:SetHeight(frame:GetHeight())
         end
 
