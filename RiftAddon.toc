@@ -10,9 +10,16 @@ SavedVariables = {
   LmFactionGlobal = 'character'
 }
 
+Embed = {
+	["vendor/lmutils"] = true
+}
+
+Dependencies = {
+  LmUtils = {"required", "before"}
+}
+
 RunOnStartup = {
   "global.lua",
-  "util.lua",
   "notoriety.lua",
   "ui.lua",
   "main.lua"

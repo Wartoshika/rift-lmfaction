@@ -3,7 +3,7 @@ function LmFaction.Notoriety.update(_, notorietyUpdate)
 
     -- wenn das update alle fraktione beinhaltet, muss dieses ignoriert werden
     local allFractionList = Inspect.Faction.List()
-    if LmFaction.Util.tableLength(notorietyUpdate) == LmFaction.Util.tableLength(allFractionList) then
+    if LmUtils.tableLength(notorietyUpdate) == LmUtils.tableLength(allFractionList) then
 
         -- nichts machen
         return
