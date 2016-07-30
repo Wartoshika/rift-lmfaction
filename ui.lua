@@ -126,14 +126,17 @@ function LmFaction.Ui.maxLevelCorrections()
         local playerDetails = Inspect.Unit.Detail(player)
 
         -- wenn der spieler nicht verfügbar ist dann warten
-        if playerDetails == nil then
+        if type(playerDetails) ~= "table" then
 
             -- abbrechen
             return
         end
 
+        -- level attribut muss auch verfuegbar sein
+        if playerDetails.level == nil then return end
+
         -- event entfernen
-        Command.Event.Detach(Event.Unit.Add, scanUnits, "LmFaction.Event.Unit.Add")
+        Command.Event.Detach(Event.Unit.Availability.Full, scanUnits, "LmFaction.Event.Unit.Availability.Full")
 
         -- aktuell ist 65 das max level
         if playerDetails.level == 65 then
@@ -162,5 +165,5 @@ function LmFaction.Ui.maxLevelCorrections()
     end
 
     -- es muss erstmal gewartet werden bis der spieler geladen ist
-    Command.Event.Attach(Event.Unit.Add, scanUnits, "LmFaction.Event.Unit.Add")
+    Command.Event.Attach(Event.Unit.Availability.Full, scanUnits, "LmFaction.Event.Unit.Availability.Full")
 end

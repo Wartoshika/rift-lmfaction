@@ -3,7 +3,7 @@ Name = "LooM Faction"
 Description = "Eine Erfahrungsleiste fuer Ruf"
 Author = "Wartoshika@Brutwacht"
 Email = "oliverwarrings@freenet.de"
-Version = "1.0"
+Version = "1.0.1"
 Environment = "3.7"
 
 SavedVariables = {
