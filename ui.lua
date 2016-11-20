@@ -27,7 +27,7 @@ function LmFaction.Ui.init(_addon)
     load:SetHeight(frame:GetHeight())
     load:SetWidth(0)
     load:SetLayer(2)
-    
+
     -- hintergrundfarbe
     local staticColorLoss = .4
     local color = LmFaction.Options.color
@@ -139,7 +139,7 @@ function LmFaction.Ui.maxLevelCorrections()
         Command.Event.Detach(Event.Unit.Availability.Full, scanUnits, "LmFaction.Event.Unit.Availability.Full")
 
         -- aktuell ist 65 das max level
-        if playerDetails.level == 65 then
+        if playerDetails.level == 70 then
 
             -- ok, anpassen
             frame:SetHeight(10)
