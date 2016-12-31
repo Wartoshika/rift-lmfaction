@@ -26,6 +26,13 @@ function LmFaction.Notoriety.update(_, notorietyUpdate)
     -- details holen
     factionDetails = Inspect.Faction.Detail(factionSelected)
 
+    -- nur wenn eine fraktion gefunden wurde
+    if factionDetails == nil then
+
+        -- nichts tun da sonst eine nullpoiter exception geworfen wird
+        return
+    end
+
     -- optionen speichern
     LmFaction.Options.currentFaction = factionDetails
 
@@ -86,6 +93,6 @@ function LmFaction.Notoriety.calculateNotoriety(notorietyAmount)
     end
 
     -- nichts gefunden, sollte nicht passieren
-    return 0, 0, "N/A" 
+    return 0, 0, "N/A"
 
 end
